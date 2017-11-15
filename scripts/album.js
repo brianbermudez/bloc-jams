@@ -30,10 +30,26 @@
      ]
  };
 
+ // MY Example Album
+ var albumJohnMayer = {
+     title: 'Continuum',
+     artist: 'John Mayer',
+     label: 'Columbia Records',
+     year: '2006',
+     albumArtUrl: 'assets/images/album_covers/22.png',
+     songs: [
+         { title: 'Waiting On The World To Change', duration: '3:21' },
+         { title: 'I Dont Trust Myself(With Loving You)', duration: '4:52' },
+         { title: 'Belief', duration: '4:02'},
+         { title: 'The Heart of Life', duration: '3:18' },
+         { title: 'Vultures', duration: '4:11'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
-      + '  <td class="song-item-number">' + songNumber + '</td>'
+      + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
       + '  <td class="song-item-duration">' + songLength + '</td>'
       + '</tr>'
@@ -42,13 +58,14 @@
      return template;
  };
 
+// #1
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  var setCurrentAlbum = function(album) {
-     // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
      // #2
      albumTitle.firstChild.nodeValue = album.title;
@@ -66,6 +83,35 @@
          }
      };
 
+     var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+     var songRows = document.getElementsByClassName('album-view-song-item');
+
+     // Album button templates
+     var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
      window.onload = function() {
          setCurrentAlbum(albumPicasso);
-     };
+
+         songListContainer.addEventListener('mouseover', function(event) {
+         // #1
+         if (event.target.parentElement.className === 'album-view-song-item') {
+             event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+         }
+     });
+
+         var albums = [albumPicasso, albumMarconi, albumJohnMayer];
+         var index = 1;
+         albumImage.addEventListener("click", function(event) {
+           setCurrentAlbum(albums[index]);
+           index++;
+           if (index == albums.length) {
+             index = 0;
+           }
+         });
+
+         for (var i = 0; i < songRows.length; i++) {
+         songRows[i].addEventListener('mouseleave', function(event) {
+             this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+         });
+       }
+     }
