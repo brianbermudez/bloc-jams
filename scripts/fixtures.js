@@ -29,17 +29,17 @@ var albumPicasso = {
  };
 
  // MY Example Album
- var albumJohnMayer = {
+ var albumMayer = {
      title: 'Continuum',
      artist: 'John Mayer',
      label: 'Columbia Records',
-     year: '2006',
+     year: '2005',
      albumArtUrl: 'assets/images/album_covers/22.png',
      songs: [
-         { title: 'Waiting On The World To Change', duration: '3:21' },
+         { title: 'Waiting on the World to Change', duration: '3:21' },
          { title: 'I Dont Trust Myself(With Loving You)', duration: '4:52' },
          { title: 'Belief', duration: '4:02'},
-         { title: 'The Heart of Life', duration: '3:18' },
-         { title: 'Vultures', duration: '4:11'}
+         { title: 'Gravity', duration: '4:06' },
+         { title: 'The Heart of Life', duration: '3:19'}
      ]
  };

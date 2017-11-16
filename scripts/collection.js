@@ -1,7 +1,6 @@
-/*reusable js html template CACHED - fast*/
 var buildCollectionItemTemplate = function() {
      var template =
-    '<div class="collection-album-container column fourth">'
+     '<div class="collection-album-container column fourth">'
    + '  <img src="assets/images/album_covers/01.png"/>'
    + '  <div class="collection-album-info caption">'
    + '    <p>'
@@ -13,20 +12,22 @@ var buildCollectionItemTemplate = function() {
    + '      <br/>'
    + '    </p>'
    + '  </div>'
-   + '</div>';
+   + '</div>'
+   ;
 
-  return $(template); //jQuery an object, so that the element that is added has jQuery methods.
-}
+   return $(template);
+ };
 
+   $(window).load(function() {
+     // #1
+     var $collectionContainer = $('.album-covers');
+     // #2
+     $collectionContainer.empty();
 
-$(window).load(function(){
+     // #3
+     for (var i = 0; i < 12; i++) {
+         var $newThumbnail = buildCollectionItemTemplate();
 
-  /*GENERATE CONTENT USING TEMPLATE*/
-  var $collectionContainer = $('.album-covers');
-        /*empty it out*/
-  $collectionContainer.empty();
-  for(var i=0; i<12; i++){
-    var $newThumbnail = buildCollectionItemTemplate();
-    $collectionContainer.append($newThumbnail);
-  }
-});
+         $collectionContainer.append($newThumbnail);
+     }
+ });
